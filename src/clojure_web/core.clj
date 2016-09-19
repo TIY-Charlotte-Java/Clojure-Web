@@ -18,18 +18,35 @@
                     purchases)]
     purchases))
 
-(defn purchases-html []
-  (let [purchases (read-purchases)]
-    [:ol
-     (map (fn [purchases]
-            [:li (str (get purchases "customer_id") " " (get purchases "category"))])
-          purchases)]))
+
+(defn purchases-html [category]
+  (let [purchases (read-purchases)
+        purchases (if (= 0 (count category))
+                 purchases
+                 (filter (fn [purchases]
+                           (= (get purchases "category") category))
+                         purchases))]
+
+    [:div
+     [:a {:href "/Alcohol"} "Alcohol "]
+     [:a {:href "/Furniture"} "Furniture "]
+     [:a {:href "/Toiletries"} "Toiletries "]
+     [:a {:href "/Shoes"} "Shoes "]
+     [:a {:href "/Jewelry"} "Jewelry "]
+     [:a {:href "/"} "All"]
+     [:ol
+
+      (map (fn [purchases]
+             [:li (str (get purchases "customer_id") " " (get purchases "date") " " (get purchases "credit_card") " "
+                       (get purchases "cvv") " " (get purchases "category"))])
+           purchases)]]
+    ))
 
 (c/defroutes app
              (c/GET "/:category{.*}" [category]
                     (h/html [:html
                              [:body
-                              (purchases-html)]])))
+                              (purchases-html category)]])))
 
 (defonce server (atom nil))
 
