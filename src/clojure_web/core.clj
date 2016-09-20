@@ -10,13 +10,13 @@
         purchases (str/split-lines purchases)
         purchases (map (fn [line]
                       (str/split line #","))
-                    purchases)
+                       purchases)
         header (first purchases)
         purchases (rest purchases)
         purchases (map (fn [line]
                       (zipmap header line))
-                    purchases)]
-    purchases))
+                       purchases)]
+  purchases))
 
 
 (defn purchases-html [category]
@@ -24,9 +24,8 @@
         purchases (if (= 0 (count category))
                  purchases
                  (filter (fn [purchases]
-                           (= (get purchases "category") category))
-                         purchases))]
-
+                       (= (get purchases "category") category))
+                       purchases))]
     [:div
      [:a {:href "/Alcohol"} "Alcohol "]
      [:a {:href "/Furniture"} "Furniture "]
@@ -39,8 +38,7 @@
       (map (fn [purchases]
              [:li (str (get purchases "customer_id") " " (get purchases "date") " " (get purchases "credit_card") " "
                        (get purchases "cvv") " " (get purchases "category"))])
-           purchases)]]
-    ))
+           purchases)]]))
 
 (c/defroutes app
              (c/GET "/:category{.*}" [category]
