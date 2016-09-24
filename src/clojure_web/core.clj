@@ -8,7 +8,7 @@
 (defonce server (atom nil))
 
 (defn purchaseList []
-  (println "What category would you like to filter by...")
+  ;(println "What category would you like to filter by...")
   (let
     [purchases (slurp "purchases.csv")
      purchases (str/split-lines purchases)
@@ -48,12 +48,12 @@
                (h/html [:html
                         [:body
                          [:a {:href "/Alcohol"} "Alcohol "]
-                         [:a {:href "/Furniture"} "Furniture "]
+                         [:a {:href "/Food"} "Food "]
                          [:a {:href "/Toiletries"} "Toiletries "]
                          [:a {:href "/Shoes"} "Shoes "]
-                         [:a {:href "/Alcohol"} "Alcohol "]
                          [:a {:href "/Jewelry"} "Jewelry "]
-                         [:a {:href "/Food"} "Food "]
+                         [:a {:href "/Furniture"} "Furniture "]
+                         [:a {:href "/"} "All "]
                          (purchases-html category)]])))
 
 (defonce server (atom nil))
@@ -61,4 +61,4 @@
 (defn -main []
   (when @server
     (.stop @server))
-  (reset! server (j/run-jetty app {:port 3000 :join? false})))
+  (reset! server (j/run-jetty app {:port 3001 :join? false})))
