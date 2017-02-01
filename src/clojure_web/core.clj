@@ -35,7 +35,13 @@
 
     (defn purchases-html [category-name] ; take the people and map it to its html
       (let [purchases (read-puchases category-name)] ; each entry is a map of person
+
         [:table ; ordered list in Html
+         [:a {:href "/Alcohol"} "Alcohol  "  ]
+         [:a {:href "/Furniture"} "Furniture  " ]
+         [:a {:href "/Toiletries"} "Toiletries  "]
+         [:a {:href "/Jewelry"} "Jewelry  "]
+         [:a {:href "/Food"} "Food  "]
          [:tr [:th  (str "customer_id") ]
               [:th (str "date")]
               [:th (str "credit_card")]
