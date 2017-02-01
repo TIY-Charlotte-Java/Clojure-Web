@@ -29,7 +29,7 @@
     (if (.isEmpty category-name)
       purchases
       (filter (fn [line]
-                (.equalsIgnoreCase (get line "purchases") category-name)) purchases))))
+                (.equalsIgnoreCase (get line "category") category-name)) purchases))))
 
     ; writes the file to json
 
@@ -37,7 +37,7 @@
       (let [purchases (read-puchases category-name)] ; each entry is a map of person
         [:table ; ordered list in Html
          (map (fn [purchase]
-                [:tr [:td<customer_id>]]
+                [:tr [:td :customer_id]]
                 [:tr [:td (str (get purchase "customer_id") )]
                      [:td (str (get purchase "date"))]
                      [:td (str (get purchase "credit_card"))]
