@@ -36,8 +36,12 @@
     (defn purchases-html [category-name] ; take the people and map it to its html
       (let [purchases (read-puchases category-name)] ; each entry is a map of person
         [:table ; ordered list in Html
+         [:tr [:th  (str "customer_id") ]
+              [:th (str "date")]
+              [:th (str "credit_card")]
+              [:th (str "cvv")]
+              [:th (str "category")]]
          (map (fn [purchase]
-                [:tr [:td :customer_id]]
                 [:tr [:td (str (get purchase "customer_id") )]
                      [:td (str (get purchase "date"))]
                      [:td (str (get purchase "credit_card"))]
